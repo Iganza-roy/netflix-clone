@@ -2,6 +2,7 @@ import './Login.css';
 import logo from '../../assets/logo.png';
 import { useState } from 'react';
 import { login, signUp } from '../../firebase';
+import netflix_spinner from '../../assets/netflix_spinner.gif';
 
 const Login = () => {
   const [signState, setSignState] = useState('Sign In');
@@ -9,8 +10,26 @@ const Login = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  return (
+  const user_auth = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    if (signState === 'sign In') {
+      await login(email, password);
+    } else {
+      await signUp(name, email, password);
+    }
+    setLoading(false);
+  };
+
+  return loading ? (
+    <div className='loading'>
+      <img src={netflix_spinner} alt='' />
+    </div>
+  ) : (
     <div className='login'>
       <img src={logo} alt='' className='login-logo' />
       <div className='login-form'>
@@ -19,7 +38,7 @@ const Login = () => {
           {signState === 'Sign Up' ? (
             <input
               value={name}
-              onChange={(e) => e.target.value}
+              onChange={(e) => setName(e.target.value)}
               type='text'
               placeholder='Your Name'
             />
@@ -29,22 +48,19 @@ const Login = () => {
 
           <input
             value={email}
-            onChange={(e) => e.target.value}
+            onChange={(e) => setEmail(e.target.value)}
             type='email'
             placeholder='Your Email'
           />
           <input
             value={password}
-            onChange={(e) => e.target.value}
+            onChange={(e) => setPassword(e.target.value)}
             type='password'
             placeholder='Your Password'
           />
-          {signState === 'Sign Up' ? (
-            <button>Sign Up</button>
-          ) : (
-            <button>Sign In</button>
-          )}
-
+          <button onClick={user_auth} type='submit'>
+            {signState}
+          </button>
           <div className='form-help'>
             <div className='remember'>
               <input type='checkbox' />

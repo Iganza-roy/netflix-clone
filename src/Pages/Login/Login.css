@@ -85,3 +85,26 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading img {
+  width: 60px;
+}
+
+@media (max-width: 500px) {
+  .login {
+    padding: 15px 5%;
+  }
+
+  .login-form {
+    padding: 20px;
+    margin-top: 30px;
+  }
+}
