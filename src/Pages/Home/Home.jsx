@@ -32,6 +32,12 @@ const Home = () => {
           <TitleCards />
         </div>
       </div>
+      <div className='more-cards'>
+        <TitleCards title={'BlockBuster Movies'} />
+        <TitleCards title={'Only on Netflix'} />
+        <TitleCards title={'Upcoming'} />
+        <TitleCards title={'Top pics for you'} />
+      </div>
     </div>
   );
 };
