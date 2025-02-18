@@ -1,9 +1,14 @@
 import './Login.css';
 import logo from '../../assets/logo.png';
 import { useState } from 'react';
+import { login, signUp } from '../../firebase';
 
 const Login = () => {
   const [signState, setSignState] = useState('Sign In');
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className='login'>
@@ -12,13 +17,28 @@ const Login = () => {
         <h1>{signState}</h1>
         <form>
           {signState === 'Sign Up' ? (
-            <input type='text' placeholder='Your Name' />
+            <input
+              value={name}
+              onChange={(e) => e.target.value}
+              type='text'
+              placeholder='Your Name'
+            />
           ) : (
             <></>
           )}
 
-          <input type='email' placeholder='Your Email' />
-          <input type='password' placeholder='Your Password' />
+          <input
+            value={email}
+            onChange={(e) => e.target.value}
+            type='email'
+            placeholder='Your Email'
+          />
+          <input
+            value={password}
+            onChange={(e) => e.target.value}
+            type='password'
+            placeholder='Your Password'
+          />
           {signState === 'Sign Up' ? (
             <button>Sign Up</button>
           ) : (
@@ -45,7 +65,7 @@ const Login = () => {
               <span
                 onClick={() => {
                   setSignState('Sign In');
-                }}    
+                }}
               >
                 Sign In Now
               </span>
