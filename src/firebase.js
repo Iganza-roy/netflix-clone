@@ -16,6 +16,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
+import { toast } from 'sonner';
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -34,6 +35,7 @@ const signUp = async (name, email, password) => {
       authProvider: 'local',
       email,
     });
+    toast.success('Account created successfully');
   } catch (error) {
     console.log('Error creating user:', error);
     alert(error.message);
@@ -43,6 +45,7 @@ const signUp = async (name, email, password) => {
 const login = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    toast.success('Logged in successfully');
   } catch (err) {
     console.log('Error signing in:', err);
     alert(err.message);
@@ -50,7 +53,8 @@ const login = async (email, password) => {
 };
 
 const logout = () => {
-    signOut(auth);
-}
+  signOut(auth);
+  toast.success('Logged out successfully');
+};
 
-export {auth, db, login, logout, signUp}
+export { auth, db, login, logout, signUp };
