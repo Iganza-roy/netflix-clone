@@ -5,6 +5,7 @@ import Player from './Pages/Player/Player';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
 import { auth } from './firebase';
+import { toast } from 'sonner';
 
 const App = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const App = () => {
         navigate('/');
       } else {
         navigate('/login');
+        toast.info('Login to continue');
       }
     });
   }, []);
